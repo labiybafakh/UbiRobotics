@@ -1,0 +1,169 @@
+﻿// -*- C++ -*-
+/*!
+ * @file  ModuleNameTest.cpp
+ * @brief ModuleDescription
+ * @date $Date$
+ *
+ * $Id$
+ */
+
+#include "ModuleNameTest.h"
+
+// Module specification
+// <rtc-template block="module_spec">
+static const char* modulename_spec[] =
+  {
+    "implementation_id", "ModuleNameTest",
+    "type_name",         "ModuleNameTest",
+    "description",       "ModuleDescription",
+    "version",           "1.0.0",
+    "vendor",            "VenderName",
+    "category",          "Category",
+    "activity_type",     "PERIODIC",
+    "kind",              "DataFlowComponent",
+    "max_instance",      "1",
+    "language",          "C++",
+    "lang_type",         "compile",
+    ""
+  };
+// </rtc-template>
+
+/*!
+ * @brief constructor
+ * @param manager Maneger Object
+ */
+ModuleNameTest::ModuleNameTest(RTC::Manager* manager)
+    // <rtc-template block="initializer">
+  : RTC::DataFlowComponentBase(manager),
+    m_velocityCamIn("velocityCam", m_velocityCam),
+    m_inVelocityIn("inVelocity", m_inVelocity),
+    m_outVelocityOut("outVelocity", m_outVelocity)
+
+    // </rtc-template>
+{
+}
+
+/*!
+ * @brief destructor
+ */
+ModuleNameTest::~ModuleNameTest()
+{
+}
+
+
+
+RTC::ReturnCode_t ModuleNameTest::onInitialize()
+{
+  // Registration: InPort/OutPort/Service
+  // <rtc-template block="registration">
+  // Set InPort buffers
+  addInPort("outVelocity", m_outVelocityIn);
+  
+  // Set OutPort buffer
+  addOutPort("velocityCam", m_velocityCamOut);
+  addOutPort("inVelocity", m_inVelocityOut);
+  
+  // Set service provider to Ports
+  
+  // Set service consumers to Ports
+  
+  // Set CORBA Service Ports
+  
+  // </rtc-template>
+
+  // <rtc-template block="bind_config">
+  // </rtc-template>
+  
+  return RTC::RTC_OK;
+}
+
+/*
+RTC::ReturnCode_t ModuleNameTest::onFinalize()
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ModuleNameTest::onStartup(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ModuleNameTest::onShutdown(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+
+RTC::ReturnCode_t ModuleNameTest::onActivated(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+
+
+RTC::ReturnCode_t ModuleNameTest::onDeactivated(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+
+
+RTC::ReturnCode_t ModuleNameTest::onExecute(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+
+/*
+RTC::ReturnCode_t ModuleNameTest::onAborting(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ModuleNameTest::onError(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ModuleNameTest::onReset(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ModuleNameTest::onStateUpdate(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ModuleNameTest::onRateChanged(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+
+
+extern "C"
+{
+ 
+  void ModuleNameTestInit(RTC::Manager* manager)
+  {
+    coil::Properties profile(modulename_spec);
+    manager->registerFactory(profile,
+                             RTC::Create<ModuleNameTest>,
+                             RTC::Delete<ModuleNameTest>);
+  }
+  
+};
+
+
